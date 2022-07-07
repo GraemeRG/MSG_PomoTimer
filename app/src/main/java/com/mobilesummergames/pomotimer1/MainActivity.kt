@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
@@ -29,9 +30,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             PomoTimer1Theme {
                 // A surface container using the 'background' color from the theme
+                val backgroundColor = timerViewModel.backgroundColor.observeAsState()
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = PurpleGrey80
+                    color = backgroundColor.value ?: PurpleGrey80
                 ) {
                     Column(
                         verticalArrangement = Arrangement.Center,
@@ -54,7 +56,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainTimer(viewModel: TimerViewModel, modifier: Modifier = Modifier) {
     val timeRemaining = viewModel.timeRemainingOutput.observeAsState()
-    Text(text = "${timeRemaining.value}", fontSize = 52.sp, fontFamily = dancingScript, fontWeight = FontWeight.Bold)
+    Text(text = "${timeRemaining.value}", color = Color.White, fontSize = 52.sp, fontFamily = dancingScript, fontWeight = FontWeight.Bold)
 }
 
 @Preview(showBackground = true)
