@@ -6,10 +6,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mobilesummergames.pomotimer1.ui.theme.Purple80
-import com.mobilesummergames.pomotimer1.ui.theme.PurpleGrey80
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
-import org.joda.time.format.DateTimeFormatter
 
 class TimerViewModel : ViewModel() {
     private lateinit var timer: CountDownTimer
@@ -26,8 +24,6 @@ class TimerViewModel : ViewModel() {
             override fun onTick(timeRemaining: Long) {
                 adjustTimeRemaining(timeRemaining)
                 updateBackgroundColour()
-
-                Log.d("LISTEN!", "Seconds Remaining: $secondsRemaining")
             }
 
             override fun onFinish() {
