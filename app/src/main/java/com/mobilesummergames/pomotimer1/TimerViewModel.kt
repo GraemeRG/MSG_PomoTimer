@@ -56,17 +56,19 @@ class TimerViewModel : ViewModel() {
         return if (asString.length < 2) "0$asString" else asString
     }
 
+    private val hexPattern = DateTimeFormat.forPattern("hhMMss")
     private fun updateBackgroundColour() {
         backgroundColor
             .postValue(
                 DateTime
                     .now()
+                    .toString(hexPattern)
+                    .toInt()
+                    .toString(16)
+                    .let { if(it.length < 6) "0$it" else it }
                     .let {
-                        Color(
-                            red = it.hourOfDay,
-                            green = it.minuteOfHour,
-                            blue = it.secondOfMinute
-                        )
+                        Log.d("LISTEN!", "Colour is: $it")
+                        Color(android.graphics.Color.parseColor("#$it"))
                     }
             )
     }
